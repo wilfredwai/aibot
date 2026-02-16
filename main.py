@@ -25,11 +25,15 @@ def main():
     )
     #"Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum."
     
+    if args.verbose:
+        if response.usage_metadata is None:
+            raise RuntimeError("API request failed")
+        print(f"User prompt: {args.user_prompt}")
+        print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
+        print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
 
-    if response.usage_metadata is None:
-        raise RuntimeError("API request failed")
-    print(f"prompt_Prompt tokens: {response.usage_metadata.prompt_token_count}")
-    print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
+        print("Response:")
+        print(response.text)
 
     print("Response:")
     print(response.text)
